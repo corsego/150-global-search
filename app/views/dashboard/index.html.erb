@@ -1,0 +1,29 @@
+<div>
+  <h2>
+    Posts
+    <%= @posts.count %>
+  </h2>
+  <% @posts.each do |post| %>
+    <%= render 'posts/post', post: %>
+  <% end %>
+</div>
+
+<div>
+  <h2>
+    Tags
+    <%= @tags.count %>
+  </h2>
+  <% @tags.each do |tag| %>
+    <%= render 'tags/tag', tag: %>
+  <% end %>
+</div>
+
+<div>
+  <h2>
+    Users
+    <%= @users.count %>
+  </h2>
+  <% @users.each do |user| %>
+    <%= render 'users/user', user: %>
+  <% end %>
+</div>
