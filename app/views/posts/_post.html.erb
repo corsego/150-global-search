@@ -1,5 +1,5 @@
 <div>
-  <%= post.title %>
+  <%= highlight post.title, params.dig(:query) %>
   <br>
-  <%= post.description %>
+  <%= highlight post.description, params.dig(:query) %>
 </div>

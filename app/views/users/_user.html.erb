@@ -1,6 +1,6 @@
 <div>
-  <%= user.first_name %>
-  <%= user.last_name %>
-  <%= user.email %>
+  <%= highlight user.first_name, params.dig(:query) %>
+  <%= highlight user.last_name, params.dig(:query) %>
+  <%= highlight user.email, params.dig(:query) %>
   <%= user.social_security_number %>
 </div>

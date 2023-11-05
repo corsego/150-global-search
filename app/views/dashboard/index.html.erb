@@ -1,29 +1,25 @@
-<div>
-  <h2>
-    Posts
-    <%= @posts.count %>
-  </h2>
-  <% @posts.each do |post| %>
-    <%= render 'posts/post', post: %>
-  <% end %>
-</div>
+<%= link_to 'Reset search', dashboard_path if params[:query].present? %>
+<%= form_with url: dashboard_path, method: :get do |form| %>
+  <%= form.search_field :query, value: params[:query], autofocus: true, placeholder: "Search anything" %>
+  <%= form.submit "Search" %>
+<% end %>
 
-<div>
-  <h2>
-    Tags
-    <%= @tags.count %>
-  </h2>
-  <% @tags.each do |tag| %>
-    <%= render 'tags/tag', tag: %>
-  <% end %>
-</div>
-
-<div>
-  <h2>
-    Users
-    <%= @users.count %>
-  </h2>
-  <% @users.each do |user| %>
-    <%= render 'users/user', user: %>
-  <% end %>
-</div>
+<%#= @search_results %>
+<% DashboardController::SEARCHABLE_MODEL_ATTRIBUTES.each do |model_name, searchable_fields| %>
+  <%#= model_name %>
+  <%#= searchable_fields %>
+  <% results = @search_results[model_name] %>
+  <div>
+    <h2>
+      <%= model_name %>
+      <%= results.count %>
+    </h2>
+    <% results.each do |result| %>
+      <%# searchable_fields.each do |field| %>
+        <%#= highlight result[field], params[:query] %>
+      <%# end %>
+      <%#= result.id %>
+      <%= render "#{model_name.downcase.pluralize}/#{model_name.downcase}", model_name.downcase.to_sym => result %>
+    <% end %>
+  </div>
+<% end %>
